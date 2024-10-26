@@ -1,8 +1,15 @@
 <script setup>
 import jobsData from '@/jobs copy.json'
-import { onMounted, ref } from 'vue';
+import { onMounted, defineProps, ref } from 'vue';
 import JobListingSingular from './JobListingSingular.vue';
 
+defineProps({
+    limit:Number,
+    showButton:{
+        type:Boolean,
+        default:false
+    }
+})
 const jobs = ref(jobsData);
 
 </script>
@@ -14,8 +21,16 @@ const jobs = ref(jobsData);
                 Browse Jobs
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <JobListingSingular v-for="job in jobs" :key="job.id" :job="job"/>
+                <JobListingSingular v-for="job in jobs.slice(0,limit||jobs.length)" :key="job.id" :job="job"/>
             </div>
         </div>
+    </section>
+    <section class="m-auto max-w-lg my-10 px-6">
+      <a
+        v-if = "showButton"
+        href="jobs.html"
+        class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
+        >View All Jobs</a
+      >
     </section>
 </template>

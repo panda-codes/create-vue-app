@@ -9,7 +9,7 @@
   <NavBar/>
   <Hero Title="Test Title" subtitle="Find the Vue job that fits your skills and needs"/>
   <HomeCards/>
-  <JobListing/>
+  <JobListing :showButton="true" :limit="3"/>
 </template>
 
 <style scoped></style>
